@@ -15,7 +15,7 @@ import com.training.pom.Customer_OnlinePOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class Customer_Activity_Test {
+public class RTTC28_Customer_Activity_Test {
 	private WebDriver driver;
 	private String baseUrl;
 	private Customer_ActivityPOM custAvtPOM;

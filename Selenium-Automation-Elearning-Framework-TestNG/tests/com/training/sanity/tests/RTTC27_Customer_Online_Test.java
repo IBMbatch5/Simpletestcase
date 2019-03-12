@@ -4,71 +4,70 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.training.generics.ScreenShot;
-import com.training.pom.Prod_PurchasedPOM;
+import com.training.pom.Customer_OnlinePOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class Prod_Purchased_Test {
+public class RTTC27_Customer_Online_Test {
 	private WebDriver driver;
 	private String baseUrl;
-	private Prod_PurchasedPOM prodPOM;
+	private Customer_OnlinePOM custOnPOM;
 	private static Properties properties;
 	private ScreenShot screenShot;
 	
-	@BeforeClass
+	@Test(priority=1)
 	public static void setUpBeforeClass() throws IOException {
 		properties = new Properties();
 		FileInputStream inStream = new FileInputStream("./resources/others.properties");
 		properties.load(inStream);
 	}
 
-	@BeforeMethod
+	@Test(priority=2)
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		prodPOM = new Prod_PurchasedPOM(driver); 
+		custOnPOM = new Customer_OnlinePOM(driver); 
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the browser 
 		driver.get(baseUrl);
-		
 	}
 	
 	
-	@Test
+	@Test(priority=3)
 	public void validLoginTest() {
-		prodPOM.sendUserName("admin");
-		prodPOM.sendPassword("admin@123");
-		prodPOM.clickLoginBtn(); 
-		prodPOM.clickButtonMenu();
-		prodPOM.clickReports();
-		prodPOM.clickProducts();
-		prodPOM.clickPurchased();
-		screenShot.captureScreenShot("RTTC26-Total products purchased");
-		prodPOM.clickOrderStatus();
-		screenShot.captureScreenShot("RTTC26-Order Status list");
-		prodPOM.selectCompleteStatus();
-		prodPOM.clickFilter();
-		screenShot.captureScreenShot("RTTC26-Complete filter list");
+		custOnPOM.sendUserName("admin");
+		custOnPOM.sendPassword("admin@123");
 		
+		custOnPOM.clickLoginBtn(); 
+		custOnPOM.clickButtonMenu();
+		custOnPOM.clickReports();
+		custOnPOM.clickCustomers();
+		custOnPOM.clickCustOnline();
+		screenShot.captureScreenShot("RTTC27-Total customer in online");
+		custOnPOM.sendCustomerName("shobana rajendran");
+		screenShot.captureScreenShot("RTTC27-Customer name entry");
+		custOnPOM.clickFilter();
+		screenShot.captureScreenShot("RTTC27-filter list");
+		String selelist = driver.getPageSource();
+		
+		//assertion used with ip address 
+		Assert.assertTrue(selelist.contains("186"), "122.164.214.186");
+		System.out.println("Assert verification - Filtered successfully");
 	}
 	
-	@AfterMethod
+	@Test(priority=4)
 	public void LogoutTest() {
-		prodPOM.clickLogout(); 
-		screenShot.captureScreenShot("RTTC26-Admin Homepage");
+		custOnPOM.clickLogout(); 
 	}
 	
-	@AfterClass
+	@Test(priority=5)
 	public void tearDown() throws Exception {
 		Thread.sleep(1000);
 		driver.quit();
