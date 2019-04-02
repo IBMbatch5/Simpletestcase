@@ -9,9 +9,9 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public class ReadExcel {
+public class ReadGroupExcel {
 	
-	public String[][] getExcelData(String fileName, String sheetName) 
+	public String[][] getExcelDatas(String fileName, String sheetName) 
 	   {
 			String[][] arrayExcelData = null;
 			try 
@@ -43,7 +43,7 @@ public class ReadExcel {
 
 	// Test method, change the path of the .xls file 
 	public static void main(String[] args) {
-		String[][] result = new ReadExcel().getExcelData("C:\\Selenium\\TestData.xls", "Sheet1"); 
+		String[][] result = new ReadGroupExcel().getExcelDatas("C:\\Selenium\\TestData.xls", "Sheet1"); 
 		
 		for(String [] temp : result){
 			for(String temp1: temp){

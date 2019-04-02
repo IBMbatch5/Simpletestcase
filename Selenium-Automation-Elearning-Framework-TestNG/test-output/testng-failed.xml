@@ -3,14 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.training.sanity.tests.RTTC56_Add_DiscountTest2">
+      <class name="com.training.sanity.tests.RTTC88_InvalidgroupTest">
         <methods>
-          <include name="logoutTest"/>
-          <include name="tearDown"/>
           <include name="setUpBeforeClass"/>
           <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="RTTC88_InvalidgroupTest" invocation-numbers="1 2 3"/>
         </methods>
-      </class> <!-- com.training.sanity.tests.RTTC56_Add_DiscountTest2 -->
+      </class> <!-- com.training.sanity.tests.RTTC88_InvalidgroupTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
